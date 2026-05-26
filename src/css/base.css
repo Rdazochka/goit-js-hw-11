@@ -61,7 +61,7 @@ form input {
 }
 
 form input::placeholder {
-  color: #2E2F42;
+  color: #2e2f42;
 }
 
 form input:hover {
@@ -88,5 +88,83 @@ form button {
 }
 
 form button:hover {
-  background-color: #6C8CFF;
+  background-color: #6c8cff;
+}
+
+.hidden {
+  display: none;
+}
+
+.loader {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  margin: 24px auto;
+}
+
+.loader:before,
+.loader:after {
+  content: '';
+  border-radius: 50%;
+  position: absolute;
+  inset: 0;
+  box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.3) inset;
+}
+.loader:after {
+  box-shadow: 0 2px 0 #ff3d00 inset;
+  animation: rotate 2s linear infinite;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.gallery {
+  list-style: none;
+  padding: 32px 156px;
+  margin: 0;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.gallery-item {
+  width: 360px;
+  border: 1px solid #808080;
+  overflow: hidden;
+}
+
+.gallery-item img {
+  display: block;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.info {
+  display: flex;
+  justify-content: space-around;
+  padding: 4px 20px;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.info-item p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.info-item p:first-child {
+  font-weight: 600;
 }

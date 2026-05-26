@@ -1,6 +1,12 @@
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 import { getImagesByQuery } from './js/pixabay-api';
+import {
+  createGallery,
+  clearGallery,
+  showLoader,
+  hideLoader,
+} from './js/render-functions';
 
 const formEl = document.querySelector('.form');
 formEl.addEventListener('submit', async e => {
@@ -14,13 +20,19 @@ formEl.addEventListener('submit', async e => {
     });
     return;
   }
+  clearGallery();
+  showLoader();
   const images = await getImagesByQuery(searchQuery);
 
   if (images.hits.length === 0) {
+    hideLoader();
     iziToast.error({
       message:
         'Sorry, there are no images matching your search query. Please try again!',
     });
+
     return;
   }
+  createGallery(images.hits);
+  hideLoader();
 });
