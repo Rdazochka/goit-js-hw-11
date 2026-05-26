@@ -22,17 +22,25 @@ formEl.addEventListener('submit', async e => {
   }
   clearGallery();
   showLoader();
-  const images = await getImagesByQuery(searchQuery);
 
-  if (images.hits.length === 0) {
-    hideLoader();
+  try {
+    const images = await getImagesByQuery(searchQuery);
+
+    if (images.hits.length === 0) {
+      iziToast.error({
+        message:
+          'Sorry, there are no images matching your search query. Please try again!',
+      });
+      return;
+    }
+
+    createGallery(images.hits);
+  } catch (error) {
     iziToast.error({
-      message:
-        'Sorry, there are no images matching your search query. Please try again!',
+      title: 'Error',
+      message: 'Something went wrong. Please try again later.',
     });
-
-    return;
+  } finally {
+    hideLoader();
   }
-  createGallery(images.hits);
-  hideLoader();
 });
